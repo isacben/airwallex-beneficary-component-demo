@@ -1,0 +1,25 @@
+{
+  "name": "airwallex-beneficary-component-demo",
+  "version": "1.0.0",
+  "description": "Embedded Beneficiary Component Demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isacben/airwallex-beneficary-component-demo.git"
+  },
+  "author": "Isaac Benitez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/isacben/airwallex-beneficary-component-demo/issues"
+  },
+  "homepage": "https://github.com/isacben/airwallex-beneficary-component-demo#readme",
+  "dependencies": {
+    "@airwallex/payouts-web-sdk": "^1.5.0",
+    "axios": "^1.6.7",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
+  }
+}
