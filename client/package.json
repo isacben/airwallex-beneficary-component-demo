@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/isacben/airwallex-beneficary-component-demo#readme",
   "dependencies": {
+    "@airwallex/payouts-web-sdk": "^1.5.0",
     "serve": "^14.2.1"
   }
 }
