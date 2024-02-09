@@ -1,4 +1,5 @@
 
+import axios from 'axios';
 import { Base64 } from 'js-base64';
 import { init} from '@airwallex/payouts-web-sdk';
 
@@ -42,14 +43,21 @@ function BeneficiaryForm() {
     };
 
     const [codeChallenge, setCodeChallenge] = useState(null);
+    const [authCode, setAuthCode] = useState(null);
+
     useEffect(() => { 
         async function getCodeChallenge() {
             const code = await generateCodeChallengeFromVerifier(codeVerifier);
             setCodeChallenge(code);
         }
         getCodeChallenge();
+
+        axios.get("http://127.0.0.1:5000/auth").then((response) => {
+            console.log("http", response.status);
+        });
     }, [])
 
+    
     return <div id="beneficiary-form-container"></div>;
 }
 

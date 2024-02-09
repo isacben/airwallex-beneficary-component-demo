@@ -1,14 +1,14 @@
 require('dotenv').config();
 const config = require('./config');
+const express = require('express');
+const cors = require('cors');
 const axios = require('axios')
 const Base64 = require("js-base64");
-const express = require("express");
-const sdk = require("@airwallex/payouts-web-sdk");
 
-const app = express();
 const port = 5000;
 
-app.set("view engine", "ejs");
+const app = express();
+app.use(cors());
 
 let cachedToken = '';
 const getToken = async () => {
@@ -40,42 +40,6 @@ const getToken = async () => {
     }
 };
 
-// Generate code_verifier
-const dec2hex = (dec) => {
-  return ('0' + dec.toString(16)).slice(-2);
-};
-
-const generateCodeVerifier = () => {
-  // generate random length for code_verifier which should be between 43 and 128
-  const length = Math.random() * (129-43) + 43;   
-  const array = new Uint32Array(length/2);
-  crypto.getRandomValues(array);
-
-  return Array.from(array, dec2hex).join('');
-};
-
-const codeVerifier = generateCodeVerifier();
-
-// Generate code_challenge
-const sha256 = (plain) => {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(plain);
-  return crypto.subtle.digest('SHA-256', data);
-};
-
-const base64urlencode = (hashed) => {
-  const bytes = new Uint8Array(hashed);
-  const base64encoded = Base64.fromUint8Array(bytes, true);
-  return base64encoded;
-};
-
-const generateCodeChallengeFromVerifier = async (codeVerifier) => {
-  const hashed = await sha256(codeVerifier);
-  const base64encoded = base64urlencode(hashed);
-  return base64encoded;
-};
-
-
 const authAccount = async (codeChallange, token) => {
   try {
       const url = `${config.airwallex.clientApiHost}/api/v1/authentication/authorize`;
@@ -101,6 +65,11 @@ const authAccount = async (codeChallange, token) => {
         throw error;
     }
 };
+
+app.get("/auth", async (req, res) => {
+    console.log("/auth endpoint working...");
+    res.json({"status": "Running..."});
+});
 
 app.get("/", async (req, res) => {
     const token = await getToken();
