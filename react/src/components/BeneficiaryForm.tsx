@@ -42,23 +42,22 @@ function BeneficiaryForm() {
         return base64encoded;
     };
 
-    const [codeChallenge, setCodeChallenge] = useState(null);
-    const [authCode, setAuthCode] = useState(null);
+    const [authorizationCode, setAuthorizationCode] = useState('');
 
     useEffect(() => { 
-        async function getCodeChallenge() {
-            const code = await generateCodeChallengeFromVerifier(codeVerifier);
-            setCodeChallenge(code);
-        }
-        getCodeChallenge();
+        async function getAuthorizationCode() {
+            const codeChallenge = await generateCodeChallengeFromVerifier(codeVerifier);
 
-        axios.get("http://127.0.0.1:5000/auth").then((response) => {
-            console.log("http", response.status);
-        });
-    }, [])
+            const url = `http://127.0.0.1:5000/auth/${codeChallenge}`;
+
+            const response = await axios.get(url);
+            setAuthorizationCode(response.status);
+        }
+        getAuthorizationCode();
+    }, []);
 
     
-    return <div id="beneficiary-form-container"></div>;
+    return <div id="beneficiary-form-container">{authorizationCode}</div>;
 }
 
 export default BeneficiaryForm;

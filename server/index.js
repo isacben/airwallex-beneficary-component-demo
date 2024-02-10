@@ -66,8 +66,8 @@ const authAccount = async (codeChallange, token) => {
     }
 };
 
-app.get("/auth", async (req, res) => {
-    console.log("/auth endpoint working...");
+app.get("/auth/:code", async (req, res) => {
+    console.log("code_challenge:", req.params.code);
     res.json({"status": "Running..."});
 });
 
