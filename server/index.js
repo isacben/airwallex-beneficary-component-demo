@@ -53,12 +53,13 @@ const authAccount = async (codeChallange, token) => {
         url,
         {
             code_challenge: codeChallange,
-            scope: ["w:awx_action:onboarding"]
+            scope: ["w:awx_action:transfers_edit"]
         },
         {
           headers: loginHeader,
         },
       );
+      console.log(response);
       return response.data.authorization_code;
   } catch (error) {
         console.error("Error generating request options");
@@ -67,8 +68,12 @@ const authAccount = async (codeChallange, token) => {
 };
 
 app.get("/auth/:code", async (req, res) => {
-    console.log("code_challenge:", req.params.code);
-    res.json({"status": "Running..."});
+    const codeChallenge = req.params.code;
+
+    const token = await getToken();
+    const authorizationCode = await authAccount(codeChallenge, token);
+
+    res.json({"authorization_code": authorizationCode});
 });
 
 app.get("/", async (req, res) => {

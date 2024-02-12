@@ -1,11 +1,13 @@
 
 import axios from 'axios';
 import { Base64 } from 'js-base64';
-import { init} from '@airwallex/payouts-web-sdk';
+import { init, createElement } from '@airwallex/payouts-web-sdk';
 
 import { useState, useEffect } from 'react';
 
 function BeneficiaryForm() {
+
+    const clientId = import.meta.env.VITE_AIRWALLEX_CLIENT_ID;
 
     // Generate code_verifier
     const dec2hex = (dec) => {
@@ -42,7 +44,7 @@ function BeneficiaryForm() {
         return base64encoded;
     };
 
-    const [authorizationCode, setAuthorizationCode] = useState('');
+    //const [authorizationCode, setAuthorizationCode] = useState('');
 
     useEffect(() => { 
         async function getAuthorizationCode() {
@@ -51,13 +53,32 @@ function BeneficiaryForm() {
             const url = `http://127.0.0.1:5000/auth/${codeChallenge}`;
 
             const response = await axios.get(url);
-            setAuthorizationCode(response.status);
+            //setAuthorizationCode(response.data.authorization_code);
+
+            const authorizationCode = response.data.authorization_code;
+            console.log("authorization code: ", authorizationCode);
+            console.log("client id: ", clientId);
+            console.log("conde verifier: ", codeVerifier);
+
+            await init({
+              langKey: 'en',
+              env: 'demo',
+              authCode: authorizationCode,
+              clientId: clientId,
+              codeVerifier: codeVerifier,
+            });
+
+            const beneficiaryComponent = createElement('beneficiaryForm');
+
+            beneficiaryComponent.mount('#beneficiary-form-container');
         }
         getAuthorizationCode();
+
+
     }, []);
 
     
-    return <div id="beneficiary-form-container">{authorizationCode}</div>;
+    return <div id="beneficiary-form-container"></div>;
 }
 
 export default BeneficiaryForm;
