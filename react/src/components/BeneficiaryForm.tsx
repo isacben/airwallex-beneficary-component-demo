@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Base64 } from 'js-base64';
 import { init, createElement } from '@airwallex/payouts-web-sdk';
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 function BeneficiaryForm() {
 
@@ -44,8 +44,6 @@ function BeneficiaryForm() {
         return base64encoded;
     };
 
-    //const [authorizationCode, setAuthorizationCode] = useState('');
-
     useEffect(() => { 
         async function getAuthorizationCode() {
             const codeChallenge = await generateCodeChallengeFromVerifier(codeVerifier);
@@ -53,12 +51,8 @@ function BeneficiaryForm() {
             const url = `http://127.0.0.1:5000/auth/${codeChallenge}`;
 
             const response = await axios.get(url);
-            //setAuthorizationCode(response.data.authorization_code);
 
             const authorizationCode = response.data.authorization_code;
-            console.log("authorization code: ", authorizationCode);
-            console.log("client id: ", clientId);
-            console.log("conde verifier: ", codeVerifier);
 
             await init({
               langKey: 'en',
@@ -73,11 +67,8 @@ function BeneficiaryForm() {
             beneficiaryComponent.mount('#beneficiary-form-container');
         }
         getAuthorizationCode();
-
-
     }, []);
 
-    
     return <div id="beneficiary-form-container"></div>;
 }
 

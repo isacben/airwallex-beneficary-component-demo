@@ -59,7 +59,7 @@ const authAccount = async (codeChallange, token) => {
           headers: loginHeader,
         },
       );
-      console.log(response);
+
       return response.data.authorization_code;
   } catch (error) {
         console.error("Error generating request options");
@@ -76,33 +76,7 @@ app.get("/auth/:code", async (req, res) => {
     res.json({"authorization_code": authorizationCode});
 });
 
-app.get("/", async (req, res) => {
-    const token = await getToken();
-
-    const codeChallange = await generateCodeChallengeFromVerifier(codeVerifier);
-    const authorizationCode = await authAccount(codeChallange, token);
-    console.log("Code verifier:", codeVerifier);
-    console.log("Authorization Code:", authorizationCode);
-
-    res.render("index");
-    try {
-    await sdk.init({
-      langKey: 'en',
-      env: 'demo',
-      authCode: authorizationCode, 
-      clientId: config.airwallex.clientId,
-      codeVerifier: codeVerifier,
-    });
-    }
-    catch(error) {
-        console.log(error);
-    }
-
-    const beneficiaryComponentlement = sdk.createElement('beneficiaryForm');
-    beneficiaryComponentlement.mount('#beneficiary-form-container');
-});
-
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}!`);
+  console.log(`App listening on port ${port}!`);
 });
 
