@@ -1,6 +1,6 @@
 # Airwallex Beneficary Component Demo - Node Server
 
-This directory contains a simple example of a Node server integrated with the [Airwallex Beneficary Component API](https://www.airwallex.com/docs/payouts__embedded-beneficiary-componen). The server demonstrates how to use the API to request the authorization code required to mount the embedded component in the frontend.
+This directory contains a simple example of a Node server integrated with the [Airwallex Beneficary Component API](https://www.airwallex.com/docs/payouts__embedded-beneficiary-component). The server demonstrates how to use the API to request the authorization code required to mount the embedded component in the frontend.
 
 ## Prerequisites
 
@@ -17,7 +17,7 @@ This directory contains a simple example of a Node server integrated with the [A
 
 3. Install the package with `npm install`
 
-4. Copy the contents of `.env.example` into a `.env` file by running `cp .env.eample .env`
+4. Copy the contents of `.env.example` into a `.env` file by running `cp .env.example .env`
 
 5. Run the project in development mode with `npm start`. See the project at localhost:5000
 

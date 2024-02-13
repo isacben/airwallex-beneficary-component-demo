@@ -1,30 +1,32 @@
-# React + TypeScript + Vite
+# Airwallex Beneficary Component with React Typescript 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This directory contains the React and Typescript implementation of the [Airwallex Embedded Beneficary Component](https://www.airwallex.com/docs/payouts__embedded-beneficiary-component). 
 
-Currently, two official plugins are available:
+## Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [node.js](https://nodejs.org/en/)
+- npm package manager
 
-## Expanding the ESLint configuration
+## Installation and Development
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Clone the root [airwallex-beneficiary-component-demo](https://github.com/isacben/airwallex-beneficary-component-demo) project to your local machine:
 
-- Configure the top-level `parserOptions` property like this:
+```git clone https://github.com/airwallex/airwallex-payment-demo```
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+2. Navigate into the react directory with `cd react`
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+3. Install the package with `npm install`
+
+4. Copy the contents of `.env.example` into a `.env` file by running `cp .env.example .env`
+
+5. Run the project in development mode with `npm run dev`. See the project at localhost:3000
+
+## Configuration
+
+You must change your application CLIENT_ID in the `.env` file.
+
+Your CLIENT_ID can be found on the Airwallex Webapp Platform under Account Settings > Developer. Do not share this information because it may allow access to your account.
+
+## Usage
+
+The embedded beneficiary component is written in the `src/components` folder.
