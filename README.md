@@ -14,7 +14,7 @@ Please open an issue.
 
 This demo does not create a beneficiary; it only returns the payload required to create a beneficary based on the options selected with the embedded component.
 
-The produced payload can be used to [create the beneficary](https://github.com/isacben/airwallex-beneficary-component-demo/tree/main/node) or to [create a payout](https://www.airwallex.com/docs/api#/Payouts/Payments/).
+The produced payload can be used to [create the beneficary](https://www.airwallex.com/docs/api#/Payouts/Beneficiaries/_api_v1_beneficiaries_create/post) or to [create a payout](https://www.airwallex.com/docs/api#/Payouts/Payments/_api_v1_payments_create/post).
 
 ## Navigating this project
 
