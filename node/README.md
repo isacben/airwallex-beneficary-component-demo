@@ -31,6 +31,6 @@ Your CLIENT_ID and API_KEY can be found on the Airwallex Webapp Platform under A
 
 For demo purposes, the auth routes below can be accessed with a GET request. Be sure to change it to a POST request in production to protect your acount details.
 
-- Get authorization code with http://localhost:3002/api/v1/intent/create
+- Get authorization code with `http://localhost:3000/auth/:code`
 
 Find more details about the Airwallex API [here](https://www.airwallex.com/docs/api#/Scale/Embedded_Components/_api_v1_account_authorize/post)!
