@@ -3,11 +3,13 @@ import axios from 'axios';
 import { Base64 } from 'js-base64';
 import { init, createElement } from '@airwallex/payouts-web-sdk';
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 function BeneficiaryForm() {
 
     const clientId = import.meta.env.VITE_AIRWALLEX_CLIENT_ID;
+
+    let ready = false;
 
     // Generate code_verifier
     const dec2hex = (dec) => {
@@ -44,6 +46,14 @@ function BeneficiaryForm() {
         return base64encoded;
     };
 
+    // Handle form events
+    const handleReady: Handler = () => {
+        ready = true;
+        console.log("form ready..."); 
+    }
+    
+    const [output, setOutput] = useState("");
+
     useEffect(() => { 
         async function getAuthorizationCode() {
             const codeChallenge = await generateCodeChallengeFromVerifier(codeVerifier);
@@ -65,11 +75,33 @@ function BeneficiaryForm() {
             const beneficiaryComponent = createElement('beneficiaryForm');
 
             beneficiaryComponent.mount('#beneficiary-form-container');
+
+            beneficiaryComponent.on('ready', () => {
+                handleReady();
+            });
+
+            document.getElementById('submit-button').addEventListener('click', async () => {
+                if (ready) {
+                    const formResult = await beneficiaryComponent.submit();
+                    setOutput(formResult);
+                    console.log(formResult);
+                }
+            });
         }
         getAuthorizationCode();
     }, []);
 
-    return <div id="beneficiary-form-container"></div>;
+    const triggerConfirm = async () => {
+    
+    }
+
+    return (
+        <>
+            <div id="beneficiary-form-container"/>
+            <button id="submit-button">Submit</button>
+            <pre>{JSON.stringify(output, null, 2)}</pre>
+        </>
+    );
 }
 
 export default BeneficiaryForm;
