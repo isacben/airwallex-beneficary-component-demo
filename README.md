@@ -4,7 +4,7 @@ The purpose of this project is to demonstrate how the Airwallex [Embedded Benefi
 
 This project is a minimal implementation:
 
-[Screenshot](https://github.com/isacben/airwallex-beneficary-component-demo/blob/main/assets/screenshot.png)
+![Screenshot](https://github.com/isacben/airwallex-beneficary-component-demo/blob/main/assets/screenshot.png)
 
 ## Questions, comments, or suggestions?
 
