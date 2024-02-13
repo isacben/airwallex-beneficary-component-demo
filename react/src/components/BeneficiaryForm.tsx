@@ -49,7 +49,6 @@ function BeneficiaryForm() {
     // Handle form events
     const handleReady: Handler = () => {
         ready = true;
-        console.log("form ready..."); 
     }
     
     const [output, setOutput] = useState("");
@@ -91,15 +90,15 @@ function BeneficiaryForm() {
         getAuthorizationCode();
     }, []);
 
-    const triggerConfirm = async () => {
-    
-    }
-
     return (
         <>
             <div id="beneficiary-form-container"/>
             <button id="submit-button">Submit</button>
-            <pre>{JSON.stringify(output, null, 2)}</pre>
+            { !!output && 
+                <pre>
+                    { JSON.stringify(output, null, 2) }
+                </pre>
+            }
         </>
     );
 }
