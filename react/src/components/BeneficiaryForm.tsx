@@ -93,10 +93,10 @@ function BeneficiaryForm() {
     return (
         <>
             <div id="beneficiary-form-container" className="mt-10 mb-5 border-dashed border-gray-200 border-4 p-6"/>
-            <div>
-                <button id="submit-button" type="button" className="float-right text-white bg-violet-800 hover:bg-violet-600 focus:ring-4 focus:ring-violet-300 font-medium rounded-lg text-md px-5 py-2.5 me-2 mb-2 focus:outline-none">Submit to see payload</button>
+            <div className="flex justify-end">
+                <button id="submit-button" type="button" className="text-white bg-violet-800 hover:bg-violet-600 focus:ring-4 focus:ring-violet-300 font-medium rounded-lg text-md px-5 py-2.5 me-2 mb-6 focus:outline-none">Submit to see payload</button>
             </div>
-            <div>
+            <div className="border-solid border-gray-300 border rounded-md bg-slate-100 p-6 text-sm text-slate-500 min-h-96">
                 { !!output && 
                     <pre>
                         { JSON.stringify(output, null, 2) }
