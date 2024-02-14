@@ -1,11 +1,12 @@
 
+import ColorSelector from './ColorSelector';
 import axios from 'axios';
 import { Base64 } from 'js-base64';
 import { init, createElement } from '@airwallex/payouts-web-sdk';
 
 import { useState, useEffect } from 'react';
 
-function BeneficiaryForm() {
+function BeneficiaryForm({ options }) {
 
     const clientId = import.meta.env.VITE_AIRWALLEX_CLIENT_ID;
 
@@ -50,10 +51,13 @@ function BeneficiaryForm() {
     const handleReady: Handler = () => {
         ready = true;
     }
-    
+   
     const [output, setOutput] = useState("");
+    const [op, setOp] = useState(options);
 
     useEffect(() => { 
+        setOp(options);
+
         async function getAuthorizationCode() {
             const codeChallenge = await generateCodeChallengeFromVerifier(codeVerifier);
 
@@ -71,7 +75,7 @@ function BeneficiaryForm() {
               codeVerifier: codeVerifier,
             });
 
-            const beneficiaryComponent = createElement('beneficiaryForm');
+            const beneficiaryComponent = createElement('beneficiaryForm', options);
 
             beneficiaryComponent.mount('#beneficiary-form-container');
 
@@ -88,11 +92,12 @@ function BeneficiaryForm() {
             });
         }
         getAuthorizationCode();
-    }, []);
+    }, [options]);
 
     return (
         <>
-            <div id="beneficiary-form-container" className="mt-10 mb-5 border-dashed border-gray-200 border-4 p-6"/>
+
+            <div id="beneficiary-form-container" className="mt-4 mb-5 border-dashed border-gray-200 border-4 p-6"/>
             <div className="flex justify-end">
                 <button id="submit-button" type="button" className="text-white bg-violet-800 hover:bg-violet-600 focus:ring-4 focus:ring-violet-300 font-medium rounded-lg text-md px-5 py-2.5 me-2 mb-6 focus:outline-none">Submit to see payload</button>
             </div>
