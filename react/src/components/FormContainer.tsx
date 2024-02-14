@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import BeneficiaryForm from './BeneficiaryForm';
 
-function Form() {
+function FormContainer() {
 
     const theme0 = {}; 
     const theme1 = {"components":{"textInput":{"colors":{"border":{"focus":"#61ff2f"}}},"select":{"colors":{"control":{"focus":"#50e3c2","initial":"#6cc328"}}}}};
@@ -24,4 +24,4 @@ function Form() {
     )
 }
 
-export default Form;
+export default FormContainer;
