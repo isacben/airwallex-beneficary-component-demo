@@ -19,7 +19,7 @@ This directory contains the React and Typescript implementation of the [Airwalle
 
 4. Copy the contents of `.env.example` into a `.env` file by running `cp .env.example .env`
 
-5. Run the project in development mode with `npm run dev`. See the project at localhost:3000
+5. Run the project in development mode with `npm run dev`. See the project at localhost:5173
 
 ## Configuration
 
